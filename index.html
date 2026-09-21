@@ -1,99 +1,114 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bienvenida la primavera</title>
-<style>
-  * { box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flores Amarillas</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Emilys+Candy&family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-  body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Georgia, 'Times New Roman', serif;
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
-      url('assets/flowers.jpg') center/cover no-repeat fixed;
-  }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Encode Sans Semi Expanded", sans-serif;
+            font-weight: 200;
+            font-style: normal;
+            background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+            url('assets/flowers.jpg') center/cover no-repeat fixed;
+        }
 
-  .card {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 2.5rem 3rem;
-    background: rgba(255, 255, 255, 0.72);
-    border-radius: 24px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-    max-width: 90vw;
-    margin-top: 60vh;
-  }
+        .card {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2.5rem 3rem;
+            background: rgba(255, 255, 255, 0.72);
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            max-width: 90vw;
+            margin-top: 60vh;
+        }
 
-  h1 {
-    margin: 0;
-    font-size: clamp(1.8rem, 5vw, 3rem);
-    color: #5b7d3a;
-    letter-spacing: 1px;
-  }
+        h1 {
+            margin: 0;
+            font-family: 'Emilys Candy', serif;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            color: #5b7d3a;
+            letter-spacing: 1px;
+        }
 
-  p {
-    margin: 0.75rem 0 0;
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: #7a8a5f;
-    font-style: italic;
-  }
+        p {
+            margin: 0.75rem 0 0;
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: #7a8a5f;
+            font-style: italic;
+        }
 
-  .petal {
-    position: fixed;
-    top: -10vh;
-    width: 24px;
-    height: 24px;
-    pointer-events: none;
-    opacity: 0.9;
-    animation: fall linear infinite;
-  }
+        .petal {
+            position: fixed;
+            top: -10vh;
+            width: 24px;
+            height: 24px;
+            pointer-events: none;
+            opacity: 0.9;
+            animation: fall linear infinite;
+        }
 
-  @keyframes fall {
-    from { transform: translateY(0) translateX(0) rotate(0deg); }
-    to   { transform: translateY(110vh) translateX(var(--drift)) rotate(360deg); }
-  }
+        @keyframes fall {
+            from {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            to {
+                transform: translateY(110vh) translateX(var(--drift)) rotate(360deg);
+            }
+        }
 
-  .music-btn {
-    margin-top: 1.25rem;
-    padding: 0.6rem 1.25rem;
-    border: none;
-    border-radius: 999px;
-    background: #fff3c4;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    font-size: 0.95rem;
-    cursor: pointer;
-  }
-</style>
+        .music-btn {
+            margin-top: 1.25rem;
+            padding: 0.6rem 1.25rem;
+            border: none;
+            border-radius: 999px;
+            background: #fff3c4;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Bienvenida la primavera</h1>
-    <p>Que cada flor amarilla te recuerde a florecer de nuevo.</p>
+<div class="card">
+    <h1>Feliz Primer Día de Primavera</h1>
+    <p>Que cada flor amarilla te recuerde a florecer de nuevo y que la distancia perdone este pequeño detalle</p>
     <div>
-      <button class="music-btn" id="musicBtn" type="button">&#127925; Reproducir música</button>
+        <button class="music-btn" id="musicBtn" type="button">&#127925; Clic Aquí!</button>
     </div>
-  </div>
+</div>
 
-  <div id="musicFrame" style="position:fixed; right:0; bottom:0; width:2px; height:2px; opacity:0.01; pointer-events:none;"></div>
+<div id="musicFrame"
+     style="position:fixed; right:0; bottom:0; width:2px; height:2px; opacity:0.01; pointer-events:none;"></div>
 
-  <svg width="0" height="0" style="position:absolute">
+<svg width="0" height="0" style="position:absolute">
     <symbol id="petal" viewBox="0 0 24 24">
-      <path d="M12 2 C16 6 16 10 12 12 C8 10 8 6 12 2 Z
+        <path d="M12 2 C16 6 16 10 12 12 C8 10 8 6 12 2 Z
                M12 12 C16 14 16 18 12 22 C8 18 8 14 12 12 Z
                M2 12 C6 8 10 8 12 12 C10 16 6 16 2 12 Z
                M12 12 C14 10 18 10 22 12 C18 14 14 14 12 12 Z"
-            fill="#ffd93d" stroke="#f4b400" stroke-width="0.5"/>
+              fill="#ffd93d" stroke="#f4b400" stroke-width="0.5"/>
     </symbol>
-  </svg>
+</svg>
 
-  <script>
+<script>
     // ponytail: reemplaza YOUTUBE_VIDEO_ID por el ID del video elegido (la parte tras "v=" en la URL de YouTube)
     const YOUTUBE_VIDEO_ID = 'S7gMzYqXIZc';
     const START_SECONDS = 47; // segundo exacto donde arranca la canción al dar clic
@@ -108,36 +123,36 @@
     document.head.appendChild(ytScript);
 
     window.onYouTubeIframeAPIReady = () => {
-      player = new YT.Player('musicFrame', {
-        videoId: YOUTUBE_VIDEO_ID,
-        playerVars: { start: START_SECONDS },
-      });
+        player = new YT.Player('musicFrame', {
+            videoId: YOUTUBE_VIDEO_ID,
+            playerVars: {start: START_SECONDS},
+        });
     };
 
     musicBtn.addEventListener('click', () => {
-      if (!player) return;
-      if (!playing) {
-        player.playVideo();
-        musicBtn.textContent = '⏸ Pausar música';
-      } else {
-        player.pauseVideo();
-        musicBtn.textContent = '🎵 Reproducir música';
-      }
-      playing = !playing;
+        if (!player) return;
+        if (!playing) {
+            player.playVideo();
+            musicBtn.textContent = '⏸ Pausar música';
+        } else {
+            player.pauseVideo();
+            musicBtn.textContent = '🎵 Reproducir música';
+        }
+        playing = !playing;
     });
 
     const PETAL_COUNT = 18;
     for (let i = 0; i < PETAL_COUNT; i++) {
-      const petal = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      petal.classList.add('petal');
-      petal.innerHTML = '<use href="#petal"></use>';
-      petal.style.left = `${Math.random() * 100}vw`;
-      petal.style.setProperty('--drift', `${(Math.random() - 0.5) * 200}px`);
-      petal.style.animationDuration = `${8 + Math.random() * 8}s`;
-      petal.style.animationDelay = `${Math.random() * 10}s`;
-      petal.style.width = petal.style.height = `${16 + Math.random() * 16}px`;
-      document.body.appendChild(petal);
+        const petal = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        petal.classList.add('petal');
+        petal.innerHTML = '<use href="#petal"></use>';
+        petal.style.left = `${Math.random() * 100}vw`;
+        petal.style.setProperty('--drift', `${(Math.random() - 0.5) * 200}px`);
+        petal.style.animationDuration = `${8 + Math.random() * 8}s`;
+        petal.style.animationDelay = `${Math.random() * 10}s`;
+        petal.style.width = petal.style.height = `${16 + Math.random() * 16}px`;
+        document.body.appendChild(petal);
     }
-  </script>
+</script>
 </body>
 </html>
