@@ -5,13 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bienvenida la primavera</title>
 <style>
-  :root {
-    --yellow: #ffd93d;
-    --yellow-dark: #f4b400;
-    --center: #d68910;
-    --sky: #eaf6e9;
-  }
-
   * { box-sizing: border-box; }
 
   body {
@@ -22,47 +15,8 @@
     justify-content: center;
     font-family: Georgia, 'Times New Roman', serif;
     background:
-      radial-gradient(circle at 10% 20%, var(--yellow) 0 18px, transparent 19px),
-      radial-gradient(circle at 30% 10%, var(--yellow-dark) 0 14px, transparent 15px),
-      radial-gradient(circle at 55% 25%, var(--yellow) 0 20px, transparent 21px),
-      radial-gradient(circle at 80% 15%, var(--yellow-dark) 0 16px, transparent 17px),
-      radial-gradient(circle at 95% 40%, var(--yellow) 0 18px, transparent 19px),
-      radial-gradient(circle at 15% 55%, var(--yellow-dark) 0 22px, transparent 23px),
-      radial-gradient(circle at 45% 65%, var(--yellow) 0 16px, transparent 17px),
-      radial-gradient(circle at 70% 55%, var(--yellow-dark) 0 20px, transparent 21px),
-      radial-gradient(circle at 90% 75%, var(--yellow) 0 18px, transparent 19px),
-      radial-gradient(circle at 25% 85%, var(--yellow-dark) 0 16px, transparent 17px),
-      radial-gradient(circle at 60% 90%, var(--yellow) 0 20px, transparent 21px),
-      radial-gradient(circle at 5% 90%, var(--yellow-dark) 0 14px, transparent 15px),
-      linear-gradient(160deg, var(--sky), #d9f0d3 60%, #cdeac6);
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-    position: relative;
-  }
-
-  /* pétalos de cada flor, dibujados alrededor de los centros de arriba */
-  body::before, body::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image:
-      var(--flower), var(--flower), var(--flower), var(--flower),
-      var(--flower), var(--flower), var(--flower), var(--flower),
-      var(--flower), var(--flower), var(--flower), var(--flower);
-    background-repeat: no-repeat;
-  }
-
-  :root {
-    --flower: radial-gradient(circle, var(--center) 0 6px, transparent 7px);
-  }
-
-  body::before {
-    background-position:
-      10% 20%, 30% 10%, 55% 25%, 80% 15%,
-      95% 40%, 15% 55%, 45% 65%, 70% 55%,
-      90% 75%, 25% 85%, 60% 90%, 5% 90%;
+      linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+      url('assets/flowers.jpg') center/cover no-repeat fixed;
   }
 
   .card {
@@ -74,6 +28,7 @@
     border-radius: 24px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
     max-width: 90vw;
+    margin-top: 60vh;
   }
 
   h1 {
@@ -89,12 +44,100 @@
     color: #7a8a5f;
     font-style: italic;
   }
+
+  .petal {
+    position: fixed;
+    top: -10vh;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    opacity: 0.9;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    from { transform: translateY(0) translateX(0) rotate(0deg); }
+    to   { transform: translateY(110vh) translateX(var(--drift)) rotate(360deg); }
+  }
+
+  .music-btn {
+    margin-top: 1.25rem;
+    padding: 0.6rem 1.25rem;
+    border: none;
+    border-radius: 999px;
+    background: #fff3c4;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
 </style>
 </head>
 <body>
   <div class="card">
     <h1>Bienvenida la primavera</h1>
     <p>Que cada flor amarilla te recuerde a florecer de nuevo.</p>
+    <div>
+      <button class="music-btn" id="musicBtn" type="button">&#127925; Reproducir música</button>
+    </div>
   </div>
+
+  <div id="musicFrame" style="position:fixed; right:0; bottom:0; width:2px; height:2px; opacity:0.01; pointer-events:none;"></div>
+
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="petal" viewBox="0 0 24 24">
+      <path d="M12 2 C16 6 16 10 12 12 C8 10 8 6 12 2 Z
+               M12 12 C16 14 16 18 12 22 C8 18 8 14 12 12 Z
+               M2 12 C6 8 10 8 12 12 C10 16 6 16 2 12 Z
+               M12 12 C14 10 18 10 22 12 C18 14 14 14 12 12 Z"
+            fill="#ffd93d" stroke="#f4b400" stroke-width="0.5"/>
+    </symbol>
+  </svg>
+
+  <script>
+    // ponytail: reemplaza YOUTUBE_VIDEO_ID por el ID del video elegido (la parte tras "v=" en la URL de YouTube)
+    const YOUTUBE_VIDEO_ID = 'S7gMzYqXIZc';
+    const START_SECONDS = 47; // segundo exacto donde arranca la canción al dar clic
+
+    const musicBtn = document.getElementById('musicBtn');
+    let player = null;
+    let playing = false;
+
+    // precarga el reproductor (pausado, sin sonido) apenas abre la página, para que suene al instante al dar clic
+    const ytScript = document.createElement('script');
+    ytScript.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(ytScript);
+
+    window.onYouTubeIframeAPIReady = () => {
+      player = new YT.Player('musicFrame', {
+        videoId: YOUTUBE_VIDEO_ID,
+        playerVars: { start: START_SECONDS },
+      });
+    };
+
+    musicBtn.addEventListener('click', () => {
+      if (!player) return;
+      if (!playing) {
+        player.playVideo();
+        musicBtn.textContent = '⏸ Pausar música';
+      } else {
+        player.pauseVideo();
+        musicBtn.textContent = '🎵 Reproducir música';
+      }
+      playing = !playing;
+    });
+
+    const PETAL_COUNT = 18;
+    for (let i = 0; i < PETAL_COUNT; i++) {
+      const petal = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      petal.classList.add('petal');
+      petal.innerHTML = '<use href="#petal"></use>';
+      petal.style.left = `${Math.random() * 100}vw`;
+      petal.style.setProperty('--drift', `${(Math.random() - 0.5) * 200}px`);
+      petal.style.animationDuration = `${8 + Math.random() * 8}s`;
+      petal.style.animationDelay = `${Math.random() * 10}s`;
+      petal.style.width = petal.style.height = `${16 + Math.random() * 16}px`;
+      document.body.appendChild(petal);
+    }
+  </script>
 </body>
 </html>
